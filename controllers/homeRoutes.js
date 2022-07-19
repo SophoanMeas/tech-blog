@@ -16,7 +16,7 @@ router.get('/login', (req, res) => {
   router.get('/signup', (req, res) => {
     res.render('signup');
   });
-  
+
 // get all post
 router.get('/', async (req, res) => {
   try {
@@ -73,6 +73,14 @@ router.get('/post:id', async (req, res) => {
         },
       ],
     });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+
+    res.render('single-post', {
+      posts,
+      loggedIn: req.session.loggedIn,
+    });
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
