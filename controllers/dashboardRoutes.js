@@ -39,7 +39,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-// edit a post
+// show edit a post page
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({

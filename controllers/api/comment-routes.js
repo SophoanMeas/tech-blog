@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 // create new comment
-router.get('/', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   if (req.session) {
     try {
       const commentData = await Comment.create({
@@ -32,7 +32,7 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 // delete comment
-router.get('/:id', withAuth, async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.destroy({
       where: {
@@ -43,6 +43,7 @@ router.get('/:id', withAuth, async (req, res) => {
       res.status(400).json({ response: 'No comment found!' });
       return;
     }
+    res.json(commentData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
