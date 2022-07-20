@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+          attributes: ['id', 'comments', 'postId', 'userId', 'created_at'],
           include: {
             model: User,
             attributes: ['username'],
@@ -46,7 +46,7 @@ router.get('/id', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+          attributes: ['id', 'comments', 'postId', 'userId', 'created_at'],
           include: {
             model: User,
             attributes: ['username'],
@@ -81,7 +81,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // update a post
-router.put('/:id', withAuth, (req, res) =>{
+router.put('/:id', withAuth, async (req, res) =>{
     try{
         const postData = await Post.update({
             title: req.body.title,
@@ -104,7 +104,7 @@ router.put('/:id', withAuth, (req, res) =>{
 })
 
 // delete a post
-router.delete('/:id', withAuth, (req, res) =>{
+router.delete('/:id', withAuth, async (req, res) =>{
     try{
         const postData = await Post.destroy({
             where:{

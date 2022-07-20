@@ -9,13 +9,13 @@ router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: {
-        userId: req.params.userId,
+        userId: req.session.userId,
       },
       attributes: ['id', 'title', 'post', 'created_at'],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'postId', 'userId', 'created_at'],
+          attributes: ['id', 'comments', 'postId', 'userId', 'created_at'],
           include: {
             model: User,
             attributes: ['username'],
@@ -29,7 +29,8 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    res.render('dashboard', {
+    res.render('all-posts', {
+      layout: "dashboard",
       posts,
       loggedIn: true,
     });
@@ -75,8 +76,10 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 });
 
 // show new post
-router.get('/new', (req, res) => {
-    res.render('new-posts');
+router.get('/new', withAuth, (req, res) => {
+    res.render('new-post',{
+      layout: "dashboard"
+    });
   });
 
 module.exports = router;
