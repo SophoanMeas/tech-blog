@@ -15,20 +15,8 @@
 </head>
 
 <body class="flex-column min-100-vh">
-
-  <nav class="navbar">
-    <ul>
-      <li class="li-inline nav-item"><a href="/">Home</a></li>
-      <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
-      <li class="li-inline nav-item"><a href="/login">Login</a></li>
-      <li class="li-inline nav-item"><a href="#" id="logout">Logout</a></li>
-    </ul>
-  </nav>
-
-  <div class="hero">
-    <h1 class="title"><a href="/">The Tech Blog</a></h1>
-  </div>
-  
+      {{>navbar}}
+    {{>hero}}
   <main class="col-auto">
     {{{body}}}
   </main>

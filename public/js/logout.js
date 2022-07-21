@@ -1,3 +1,5 @@
+$(document).ready(function () {
+
 const logout = async () => {
 	const response = await fetch('/api/users/logout', {
 		method: 'POST',
@@ -5,10 +7,11 @@ const logout = async () => {
 	});
 
 	if (response.ok) {
-		document.location.replace('/');
+		document.location.replace('/dashboard');
 	} else {
 		alert('Not logged in.');
 	}
 };
 
 document.querySelector('#logout').addEventListener('click', logout);
+})

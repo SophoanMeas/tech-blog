@@ -4,18 +4,18 @@ const sequelize = require('../config/connection');
 
 const { Post, User, Comment } = require('../models');
 
-// show all posts
+// get all post from user
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: {
         userId: req.session.userId,
       },
-      attributes: ['id', 'title', 'post', 'created_at'],
+      attributes: ['id', 'title', 'post_text', 'created_at'],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comments', 'postId', 'userId', 'created_at'],
+          attributes: ['id', 'comments', 'postId', 'created_at'],
           include: {
             model: User,
             attributes: ['username'],
@@ -29,8 +29,8 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    res.render('all-posts', {
-      layout: "dashboard",
+    res.render('all-posts-by-user', {
+      layout: 'dashboard',
       posts,
       loggedIn: true,
     });
@@ -45,28 +45,27 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
       where: {
-        id: params.id,
-        attribute: ['id', 'title', 'post', 'created_at'],
-        include: [
-          {
-            model: User,
-            attribute: ['username'],
-          },
-          {
-            model: Comment,
-            attribute: ['id', 'comment', 'postId', 'userId', 'created_at'],
-            include: {
-              model: User,
-              attribute: ['username'],
-            },
-          },
-        ],
+        id: req.params.id,
       },
+      attributes: ['id', 'post_text', 'title', 'created_at'],
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'comments', 'postId', 'userId', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+      ],
     });
-
-    const posts = postData.get({ plain: true });
+    const post = postData.get({ plain: true });
     res.render('edit-post', {
-      posts,
+      post,
       loggedIn: true,
     });
   } catch (err) {
@@ -77,9 +76,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
 // show new post
 router.get('/new', withAuth, (req, res) => {
-    res.render('new-post',{
-      layout: "dashboard"
-    });
-  });
+  res.render('new-post', {});
+});
 
 module.exports = router;

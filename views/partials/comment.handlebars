@@ -1,0 +1,13 @@
+{{#each post.comments as |comments|}}
+  <div>
+    <p>
+      {{comments.comments}}
+    </p>
+    <div>
+      Posted by
+      {{user.username}}
+      on
+      {{created_at}}
+    </div>
+  </div>
+{{/each}}

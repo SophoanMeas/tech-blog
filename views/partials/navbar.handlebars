@@ -1,0 +1,11 @@
+<nav class='navbar'>
+  <ul>
+    <li class='li-inline nav-item'><a href='/'>Home</a></li>
+    <li class='li-inline nav-item'><a href='/dashboard'>Dashboard</a></li>
+     {{#if loggedIn}}
+ {{else}}
+   <li class='li-inline nav-item'><a href='/login'>Login</a></li>
+     {{/if}}
+    <li class='li-inline nav-item'><a href='/logout' id='logout'>Logout</a></li>
+  </ul>
+</nav>

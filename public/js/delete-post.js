@@ -1,19 +1,19 @@
 $(document).ready(function () {
-
   const deletePostHandler = async function (event) {
     event.preventDefault();
-    
+
     const id = document.getElementById('post-id').value;
 
-    fetch(`/api/post/${id}`, {
+    const response = await fetch(`/api/posts/${id}`, {
       method: 'delete',
-    })
-      .then(function () {
-        document.location.replace('/dashboard');
-      })
-      .catch((err) => console.log(err));
-  };
+    });
 
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert(response.statusText);
+    }
+  };
   document
     .querySelector('#delete-btn')
     .addEventListener('click', deletePostHandler);

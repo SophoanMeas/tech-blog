@@ -1,17 +1,17 @@
 $(document).ready(function () {
-    
-  async function editFormHandler(event) {
+
+ const editFormHandler = async function(event) {
     event.preventDefault();
 
-    const title = document.querySelector('post-title').value;
-    const post_body = document.querySelector('post-body').value;
+    const title = document.querySelector('#post-title').value;
+    const body = document.querySelector('#post-body').value;
     const id = document.getElementById('post-id').value;
 
     const response = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
         title,
-        post_body,
+        body,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +26,6 @@ $(document).ready(function () {
   }
 
   document
-    .querySelector('.edit-post-form')
+    .querySelector('#edit-post-form')
     .addEventListener('submit', editFormHandler);
 });

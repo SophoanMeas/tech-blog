@@ -20,7 +20,7 @@ Post.init(
       },
     },
 
-    post: {
+    post_text: {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {

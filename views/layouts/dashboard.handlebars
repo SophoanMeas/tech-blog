@@ -5,38 +5,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Tech Blog</title>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+  <title>The Tech Blog</title>
+  
 </head>
 
 <body class="flex-column min-100-vh">
   <nav class="navbar">
-    <ul class="flex-row">
+    <ul>
       <li class="li-inline nav-item"><a href="/">Home</a></li>
       <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
-      <li class="li-inline nav-item"><a href="#" id="logout-link">Logout</a></li>
+      <li class="li-inline nav-item"><a href="/logout" id="logout">Logout</a></li>
     </ul>
   </nav>
   <div class="hero">
-    <h1 class="title"><a href="/">The Tech Blog</a></h1>
-  </div>
-  
-  <div class="hero-title">
-    <h1 class="app-title"><a href="/dashboard">Dashboard</a></h1>
-  </div>
-
-  <div class="footer flex-row justify-center">
-    <a href="/dashboard/new">➕ New Post</a>
+    <h1 class="title"><a href="/">Your Dashboard</a></h1>
   </div>
   <main class="col-auto">
     {{{body}}}
+        <div class="footer flex-row justify-center">
+    <a href="/dashboard/new">➕ New Post</a>
+  </div>
   </main>
-
 </body>
-
 <script src="/js/logout.js"></script>
-<script src="/js/edit.js"></script>
-<script src="/js/delete.js"></script>
-
 </html>
